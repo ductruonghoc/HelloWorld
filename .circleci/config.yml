@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  email: circleci/email@1.2.3
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -29,9 +32,9 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - say-hello
-    notify:
-      - type: email
-        recipients:
-          - your-github-email@example.com
-        on_success: always
-        on_failure: always
+      - email/send:
+          to: "your-github-email@example.com"
+          subject: "CircleCI Build Notification"
+          body: "The build for HelloWorld has completed."
+          requires:
+            - say-hello

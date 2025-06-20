@@ -32,9 +32,3 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - say-hello
-      - email/send:
-          to: "your-github-email@example.com"
-          subject: "CircleCI Build Notification"
-          body: "The build for HelloWorld has completed."
-          requires:
-            - say-hello

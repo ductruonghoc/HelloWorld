@@ -29,3 +29,9 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - say-hello
+    notify:
+      - type: email
+        recipients:
+          - your-github-email@example.com
+        on_success: always
+        on_failure: always
